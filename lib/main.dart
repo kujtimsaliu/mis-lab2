@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'screens/categories_screen.dart';
+import 'services/notification_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  await Firebase.initializeApp();
+
+  // Initialize Notification Service
+  final notificationService = NotificationService();
+  await notificationService.initialize();
+
+  // Schedule daily notification (you can call this at a specific time)
+  // For demonstration, it will show immediately
+  await notificationService.scheduleDailyRecipeNotification();
+
   runApp(const MyApp());
 }
 
